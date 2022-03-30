@@ -1,0 +1,35 @@
+def getRequiredProperty(name) {
+
+  if (project.hasProperty(name)) {
+    return project.findProperty(name)
+  }
+
+  project.logger.error("The ${name} property is required!")
+  throw new RuntimeException("The ${name} property is required!")
+}
+
+def getDefaultProperty(name, defaultValue) {
+
+  if (project.hasProperty(name)) {
+    return project.findProperty(name)
+  }
+
+  project.logger.warn("Property ${name} was not found. Defaulting to ${defaultValue}.")
+  return defaultValue
+}
+
+def getOptionalProperty(name) {
+
+  if (project.hasProperty(name)) {
+    return project.findProperty(name)
+  }
+
+  project.logger.warn("Property ${name} was not found. Defaulting to empty.")
+  return ''
+}
+
+ext {
+  getDefaultProperty = this.&getDefaultProperty
+  getRequiredProperty = this.&getRequiredProperty
+  getOptionalProperty = this.&getOptionalProperty
+}

@@ -1,0 +1,18 @@
+jar {
+    archiveBaseName = "${project.ext.name}"
+    archiveVersion =  "${project.ext.version}"
+
+    manifest {
+        attributes([
+            'Timestamp': System.currentTimeMillis(),
+            'Specification-Title': project.ext.name,
+            'Specification-Vendor': project.ext.author,
+            'Specification-Version': project.ext.version,
+            'Implementation-Title': project.ext.name,
+            'Implementation-Version': project.ext.version,
+            'Implementation-Vendor' : project.ext.author,
+            'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            'Built-On-Java': "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
+        ])
+    }
+}

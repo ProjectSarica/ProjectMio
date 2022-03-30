@@ -1,0 +1,10 @@
+sourceCompatibility = project.ext.javaVersion
+targetCompatibility = project.ext.javaVersion
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "junit:junit:4.12"
+}

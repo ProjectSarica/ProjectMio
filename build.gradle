@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+apply from: 'gradle/propertyHelper.gradle'
+
+ext.name = getRequiredProperty('name')
+ext.group = getRequiredProperty('group')
+ext.version = getRequiredProperty('version')
+ext.author = getOptionalProperty('author')
+ext.description = getOptionalProperty('description')
+ext.javaVersion = getDefaultProperty('java_version', '1.8')
+
+apply from: 'gradle/dependencies.gradle'
+apply from: 'gradle/jar.gradle'
