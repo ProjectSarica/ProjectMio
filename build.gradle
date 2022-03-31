@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'application'
 apply from: 'gradle/propertyHelper.gradle'
 
 ext.name = getRequiredProperty('name')

@@ -1,3 +1,5 @@
+apply from: 'gradle/propertyHelper.gradle'
+
 sourceCompatibility = project.ext.javaVersion
 targetCompatibility = project.ext.javaVersion
 
@@ -6,5 +8,25 @@ repositories {
 }
 
 dependencies {
-    testImplementation "junit:junit:4.12"
+
+    def deps = getOptionalProperty('compiled_deps').toString().split(",")
+    deps.each { libId ->
+        def name = getRequiredProperty("${libId}_name")
+        def group = getRequiredProperty("${libId}_group")
+        def version = getRequiredProperty("${libId}_version")
+
+        project.logger.lifecycle("Dependency ${libId} added. \'${group}:${name}:${version}\'")
+        project.getDependencies().add('implementation', "${group}:${name}:${version}")
+    }
+
+    def testDeps = getOptionalProperty('testing_deps').toString().split(",")
+    testDeps.each { libId ->
+        def name = getRequiredProperty("${libId}_name")
+        def group = getRequiredProperty("${libId}_group")
+        def version = getRequiredProperty("${libId}_version")
+
+        project.logger.lifecycle("Test dependency ${libId} added. \'${group}:${name}:${version}\'")
+        project.getDependencies().add('testImplementation', "${group}:${name}:${version}")
+    }
+
 }
